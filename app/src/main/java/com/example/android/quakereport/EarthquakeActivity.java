@@ -26,6 +26,13 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Michael S Parkin III on 1/16/2018.
+ * Sets up content view, creates ArrayList of earthquake objects.
+ * Sets up earthquake adapter with the list view.
+ * Sets onclick listener on list items to open urls.
+ */
+
 public class EarthquakeActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
@@ -48,6 +55,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         // so the list can be populated in the user interface
         earthquakeListView.setAdapter(earthAdapter);
 
+        // Sets up onclicklistener to open link to more earthquake details on click
         earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

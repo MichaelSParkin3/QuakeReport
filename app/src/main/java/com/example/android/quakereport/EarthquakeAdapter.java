@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Michael S Parkin III on 1/16/2018.
+ * Custom adapter for array of earthquake objects.
+ * With other methods for dealing with the parsed data and formatting it in the desired way.
  */
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
@@ -48,10 +50,8 @@ public EarthquakeAdapter (Activity context, ArrayList<Earthquake> earthquakeList
         // Get the {@link Earthquake} object located at this position in the list
         Earthquake currentEarthquake = getItem(position);
 
-        // Find the TextView in the list_item.xml layout with the ID version_name
+        // Find the TextView in the list_item.xml layout with the magnitude ID
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.list_item_magnitude);
-        // Get the version name from the current AndroidFlavor object and
-        // set this text on the name TextView
 
         // Format the magnitude to show 1 decimal place
         String formattedMagnitude = formatMagnitude(currentEarthquake.getMagnitude());
@@ -69,8 +69,12 @@ public EarthquakeAdapter (Activity context, ArrayList<Earthquake> earthquakeList
         magnitudeCircle.setColor(magnitudeColor);
 
 
+
+        //String of the distance away from the place
         String offset;
+        //String of where the earthquake took place
         String place;
+        //Splits the parsed string into 2 parts containing the offset and location.
         if (currentEarthquake.getCity().contains("of")) {
             String[] splits = currentEarthquake.getCity().split("of");
             offset = splits[0] + " of";
@@ -80,19 +84,19 @@ public EarthquakeAdapter (Activity context, ArrayList<Earthquake> earthquakeList
             place = currentEarthquake.getCity();
         }
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
+        // Find the TextView in the list_item.xml layout with the ID for the offset
         TextView offsetTextView = (TextView) listItemView.findViewById(R.id.list_item_offset);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
+        // Get the version number from the current earthquake object and
+        // set this text on the offset TextView
         offsetTextView.setText(offset);
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
+        // Find the TextView in the list_item.xml layout with the ID for the location
         TextView cityTextView = (TextView) listItemView.findViewById(R.id.list_item_city);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
+        // Get the version number from the current earthquake object and
+        // set this text on the city TextView
         cityTextView.setText(place);
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
+        // Find the TextView in the list_item.xml layout with the ID for the date
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.list_item_date);
 
         // Create a new Date object from the time in milliseconds of the earthquake
@@ -100,8 +104,8 @@ public EarthquakeAdapter (Activity context, ArrayList<Earthquake> earthquakeList
         // Format the date string (i.e. "Mar 3, 1984")
         String formattedDate = formatDate(dateObject);
 
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
+        // Get the version number from the current earthquake object and
+        // set this text on the date TextView
         dateTextView.setText(formattedDate);
 
 
